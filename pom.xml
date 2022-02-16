@@ -17,13 +17,6 @@
 
     <name>columbus</name>
 
-    <repositories>
-        <repository>
-            <id>palantir</id>
-            <url>https://jcenter.bintray.com/palantir/releases</url>
-        </repository>
-    </repositories>
-
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
