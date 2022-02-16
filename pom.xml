@@ -6,33 +6,24 @@
     <description>Columbus - geo ip service</description>
 
     <parent>
-        <groupId>com.rbkmoney</groupId>
-        <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.1.RELEASE</version>
+        <groupId>dev.vality</groupId>
+        <artifactId>service-parent-pom</artifactId>
+        <version>1.0.9</version>
     </parent>
 
-    <groupId>com.rbkmoney.columbus</groupId>
+    <groupId>dev.vality.columbus</groupId>
     <artifactId>columbus</artifactId>
-    <version>1.0.8-SNAPSHOT</version>
+    <version>1.0.0-SNAPSHOT</version>
 
     <name>columbus</name>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-        <java.version>11</java.version>
+        <java.version>15</java.version>
         <server.port>8022</server.port>
-        <exposed.ports>${server.port}</exposed.ports>
-        <dockerfile.base.service.tag>c0d0900ec19c907d866f8360031a836049985110</dockerfile.base.service.tag>
-        <dockerfile.registry>dr2.rbkmoney.com</dockerfile.registry>
-        <shared.resources.version>0.3.8</shared.resources.version>
-        <damsel.version>1.439-b18f037</damsel.version>
-        <woody.thrift.version>1.1.22</woody.thrift.version>
-        <db.port>5432</db.port>
-        <db.url>jdbc:postgresql://localhost:${db.port}/columbus</db.url>
-        <db.user>postgres</db.user>
-        <db.password>postgres</db.password>
-        <db.schema>columbus</db.schema>
+        <management.port>8023</management.port>
+        <exposed.ports>${server.port} ${management.port}</exposed.ports>
     </properties>
 
     <dependencies>
@@ -53,11 +44,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <artifactId>spring-boot-starter-validation</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-jdbc</artifactId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
 
         <!--Thrirdparty libs-->
@@ -65,16 +56,6 @@
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-            <version>${hikaricp.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>${postgresql.version}</version>
         </dependency>
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
@@ -88,18 +69,8 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <version>${lombok.version}</version>
+            <version>1.18.22</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jooq</groupId>
-            <artifactId>jooq</artifactId>
-            <version>${jooq.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>org.flywaydb</groupId>
-            <artifactId>flyway-core</artifactId>
-            <version>${flyway.version}</version>
         </dependency>
         <dependency>
             <groupId>com.neovisionaries</groupId>
@@ -109,49 +80,24 @@
 
         <!--RBK libs-->
         <dependency>
-            <groupId>com.rbkmoney.woody</groupId>
+            <groupId>dev.vality.woody</groupId>
             <artifactId>woody-thrift</artifactId>
-            <version>${woody.thrift.version}</version>
+            <version>1.0.4</version>
         </dependency>
         <dependency>
-            <groupId>com.rbkmoney</groupId>
+            <groupId>dev.vality</groupId>
             <artifactId>damsel</artifactId>
-            <version>${damsel.version}</version>
+            <version>1.544-dcd92dd</version>
         </dependency>
         <dependency>
-            <groupId>com.rbkmoney</groupId>
+            <groupId>dev.vality</groupId>
             <artifactId>shared-resources</artifactId>
-            <version>${shared.resources.version}</version>
         </dependency>
 
         <!--Test libs-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.palantir.docker.compose</groupId>
-            <artifactId>docker-compose-rule</artifactId>
-            <version>0.28.1</version>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.hamcrest</groupId>
-                    <artifactId>hamcrest-library</artifactId>
-                </exclusion>
-            </exclusions>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>testcontainers</artifactId>
-            <version>1.10.7</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.testcontainers</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>1.8.0</version>
             <scope>test</scope>
         </dependency>
     </dependencies>
@@ -195,7 +141,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-remote-resources-plugin</artifactId>
-                <version>1.5</version>
+                <version>1.6.0</version>
                 <dependencies>
                     <dependency>
                         <groupId>org.apache.maven.shared</groupId>
@@ -205,7 +151,7 @@
                 </dependencies>
                 <configuration>
                     <resourceBundles>
-                        <resourceBundle>com.rbkmoney:shared-resources:${shared.resources.version}</resourceBundle>
+                        <resourceBundle>dev.vality:shared-resources:${shared-resources.version}</resourceBundle>
                     </resourceBundles>
                     <attachToMain>false</attachToMain>
                     <attachToTest>false</attachToTest>
@@ -214,24 +160,6 @@
                     <execution>
                         <goals>
                             <goal>process</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <!-- Sonar-JaCoCo integration plugin -->
-            <plugin>
-                <groupId>org.jacoco</groupId>
-                <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.2</version>
-                <configuration>
-                    <destFile>${sonar.jacoco.reportPath}</destFile>
-                    <append>true</append>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>agent</id>
-                        <goals>
-                            <goal>prepare-agent</goal>
                         </goals>
                     </execution>
                 </executions>
