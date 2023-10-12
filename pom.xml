@@ -13,7 +13,7 @@
 
     <groupId>dev.vality.columbus</groupId>
     <artifactId>columbus</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.1</version>
 
     <name>columbus</name>
 
@@ -90,7 +90,7 @@
         <dependency>
             <groupId>dev.vality.woody</groupId>
             <artifactId>woody-thrift</artifactId>
-            <version>1.0.4</version>
+            <version>1.0.5</version>
         </dependency>
         <dependency>
             <groupId>dev.vality</groupId>
