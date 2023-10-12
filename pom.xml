@@ -97,10 +97,6 @@
             <artifactId>damsel</artifactId>
             <version>1.544-dcd92dd</version>
         </dependency>
-        <dependency>
-            <groupId>dev.vality</groupId>
-            <artifactId>shared-resources</artifactId>
-        </dependency>
 
         <!--Test libs-->
         <dependency>
