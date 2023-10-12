@@ -1,11 +1,11 @@
 server:
-  port: '@server.port@'
+  port: "${server.port}"
 
 management:
   security:
     flag: false
   server:
-    port: '@management.port@'
+    port: "${management.port}"
   metrics:
     export:
       prometheus:
@@ -24,13 +24,13 @@ management:
 
 spring:
   application:
-    name: '@project.name@'
+    name: "${project.name}"
   output:
     ansi:
       enabled: always
 
 info:
-  version: '@project.version@'
+  version: "${project.version}"
   stage: dev
 
 # maxmind geo service
