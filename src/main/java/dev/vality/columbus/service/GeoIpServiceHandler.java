@@ -6,11 +6,10 @@ import com.maxmind.geoip2.exception.AddressNotFoundException;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
 import com.neovisionaries.i18n.CountryCode;
+import dev.vality.columbus.ColumbusServiceSrv;
+import dev.vality.columbus.InvalidRequest;
+import dev.vality.columbus.LocationInfo;
 import dev.vality.columbus.util.IpAddressUtils;
-import dev.vality.damsel.base.InvalidRequest;
-import dev.vality.damsel.geo_ip.GeoIDInfo;
-import dev.vality.damsel.geo_ip.GeoIpServiceSrv;
-import dev.vality.damsel.geo_ip.LocationInfo;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.thrift.TException;
@@ -19,11 +18,11 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static dev.vality.damsel.geo_ip.geo_ipConstants.GEO_ID_UNKNOWN;
+import static dev.vality.columbus.columbusConstants.GEO_ID_UNKNOWN;
 
 @Slf4j
 @RequiredArgsConstructor
-public class GeoIpServiceHandler implements GeoIpServiceSrv.Iface {
+public class GeoIpServiceHandler implements ColumbusServiceSrv.Iface {
 
     private ObjectMapper mapper = new ObjectMapper();
     private static String UNKNOWN = "UNKNOWN";
@@ -75,17 +74,6 @@ public class GeoIpServiceHandler implements GeoIpServiceSrv.Iface {
         }
 
         return map;
-    }
-
-    @Override
-    public Map<Integer, GeoIDInfo> getLocationInfo(Set<Integer> geoIds, String lang) throws InvalidRequest, TException {
-        throw new UnsupportedOperationException("Method removed");
-    }
-
-    //* Если передан неизвестный geoID, он не попадет в возвращаемый результат
-    @Override
-    public Map<Integer, String> getLocationName(Set<Integer> geoIds, String lang) throws InvalidRequest, TException {
-        throw new UnsupportedOperationException("Method removed");
     }
 
     @Override

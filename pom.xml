@@ -75,8 +75,8 @@
         <!--vality libs-->
         <dependency>
             <groupId>dev.vality</groupId>
-            <artifactId>damsel</artifactId>
-            <version>1.544-dcd92dd</version>
+            <artifactId>columbus-proto</artifactId>
+            <version>1.5-c3dc5b7</version>
         </dependency>
 
         <!--Test libs-->

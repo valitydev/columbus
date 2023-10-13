@@ -2,9 +2,6 @@ package dev.vality.columbus;
 
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
-import dev.vality.damsel.base.InvalidRequest;
-import dev.vality.damsel.geo_ip.GeoIDInfo;
-import dev.vality.damsel.geo_ip.LocationInfo;
 import dev.vality.columbus.dao.GeoIpDao;
 import dev.vality.columbus.model.CityLocation;
 import dev.vality.columbus.model.Lang;
@@ -24,8 +21,9 @@ import org.springframework.test.context.junit4.SpringRunner;
 import java.io.IOException;
 import java.util.*;
 
-import static dev.vality.damsel.geo_ip.geo_ipConstants.GEO_ID_UNKNOWN;
-import static org.junit.Assert.*;
+import static dev.vality.columbus.columbusConstants.GEO_ID_UNKNOWN;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
 @RunWith(SpringRunner.class)
@@ -74,46 +72,6 @@ public class GeoServiceTest {
         LocationInfo info = handler.getLocation("172.233.233.1");
 
         assertEquals(GEO_ID_UNKNOWN, info.getCityGeoId());
-    }
-
-    @Test(expected = UnsupportedOperationException.class)
-    public void testWrongLangException() throws TException {
-        final Integer[] ids = {GEOID_KAMIZIAK, GEOID_MOSCOW, 0};
-        try {
-            Map<Integer, GeoIDInfo> info = handler.getLocationInfo(set(ids), "rublya");
-        } catch (InvalidRequest e) {
-            assertTrue(!e.getErrors().isEmpty());
-        }
-    }
-
-    @Test(expected = UnsupportedOperationException.class)
-    public void testGetLocationNullValuesInMap() throws TException {
-        final int unknown = 0;
-        final Integer[] ids = {GEOID_KAMIZIAK, GEOID_MOSCOW, unknown};
-        Map<Integer, GeoIDInfo> info = handler.getLocationInfo(set(ids), "ru");
-
-        assertEquals(info.size(), 2);
-        assertEquals("Камызяк", info.get(GEOID_KAMIZIAK).city_name);
-        assertEquals("Москва", info.get(GEOID_MOSCOW).city_name);
-    }
-
-    @Test(expected = UnsupportedOperationException.class)
-    public void testGetLocationNullValuesInNameMap() throws TException {
-        final int unknown = 0;
-        final Integer[] ids = {GEOID_KAMIZIAK, GEOID_MOSCOW, unknown};
-        Map<Integer, String> info = handler.getLocationName(set(ids), "ru");
-
-        assertEquals(info.size(), 2);
-        assertEquals("Камызяк", info.get(GEOID_KAMIZIAK));
-        assertEquals("Москва", info.get(GEOID_MOSCOW));
-    }
-
-    @Test(expected = UnsupportedOperationException.class)
-    public void testGetLocationUnknownId() throws TException {
-        final int unknown = 0;
-        final Integer[] ids = {unknown};
-        Map<Integer, String> info = handler.getLocationName(set(ids), "ru");
-        assertEquals(info.size(), 0);
     }
 
     @Test
