@@ -76,7 +76,7 @@
         <dependency>
             <groupId>dev.vality</groupId>
             <artifactId>columbus-proto</artifactId>
-            <version>1.5-c3dc5b7</version>
+            <version>1.7-094dee7</version>
         </dependency>
 
         <!--Test libs-->
