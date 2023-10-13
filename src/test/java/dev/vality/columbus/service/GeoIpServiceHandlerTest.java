@@ -3,8 +3,7 @@ package dev.vality.columbus.service;
 import com.maxmind.geoip2.exception.GeoIp2Exception;
 import com.maxmind.geoip2.model.CityResponse;
 import com.maxmind.geoip2.record.*;
-import dev.vality.damsel.base.InvalidRequest;
-import dev.vality.damsel.geo_ip.geo_ipConstants;
+import dev.vality.columbus.InvalidRequest;
 import org.apache.thrift.TException;
 import org.junit.Assert;
 import org.junit.Before;
@@ -15,6 +14,7 @@ import org.mockito.MockitoAnnotations;
 
 import java.io.IOException;
 
+import static dev.vality.columbus.columbusConstants.UNKNOWN;
 import static org.mockito.ArgumentMatchers.any;
 
 public class GeoIpServiceHandlerTest {
@@ -49,7 +49,7 @@ public class GeoIpServiceHandlerTest {
     public void getLocationIsoCodeUnknown() throws TException, IOException, GeoIp2Exception {
         Mockito.when(service.getLocationByIp(any())).thenReturn(null);
         String locationIsoCode = geoIpServiceHandler.getLocationIsoCode(IP);
-        Assert.assertEquals(geo_ipConstants.UNKNOWN, locationIsoCode);
+        Assert.assertEquals(UNKNOWN, locationIsoCode);
     }
 
     @Test(expected = InvalidRequest.class)
