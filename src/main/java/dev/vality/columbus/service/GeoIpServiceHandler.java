@@ -51,10 +51,10 @@ public class GeoIpServiceHandler implements ColumbusServiceSrv.Iface {
         int cityId = GEO_ID_UNKNOWN;
         int countryId = GEO_ID_UNKNOWN;
         if (cityResponse != null && cityResponse.getCity().getGeoNameId() != null) {
-            cityId = cityResponse.getCity().getGeoNameId();
+            cityId = cityResponse.getCity().getGeoNameId().intValue();
         }
         if (cityResponse != null && cityResponse.getCountry().getGeoNameId() != null) {
-            countryId = cityResponse.getCountry().getGeoNameId();
+            countryId = cityResponse.getCountry().getGeoNameId().intValue();
         }
         LocationInfo locationInfo = new LocationInfo(cityId, countryId);
         locationInfo.setRawResponse(json);

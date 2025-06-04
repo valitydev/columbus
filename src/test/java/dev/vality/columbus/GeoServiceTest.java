@@ -9,24 +9,21 @@ import dev.vality.columbus.service.GeoIpServiceHandler;
 import dev.vality.columbus.service.GeoService;
 import dev.vality.columbus.util.IpAddressUtils;
 import org.apache.thrift.TException;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ContextConfiguration;
-import org.springframework.test.context.junit4.SpringRunner;
 
 import java.io.IOException;
 import java.util.*;
 
 import static dev.vality.columbus.columbusConstants.GEO_ID_UNKNOWN;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 import static org.springframework.boot.test.context.SpringBootTest.WebEnvironment.RANDOM_PORT;
 
-@RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = RANDOM_PORT)
 @ContextConfiguration(classes = ColumbusApplication.class)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
@@ -52,7 +49,7 @@ public class GeoServiceTest {
 
     GeoIpServiceHandler handler;
 
-    @Before
+    @BeforeEach
     public void before() {
         handler = new GeoIpServiceHandler(service);
     }
